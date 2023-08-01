@@ -6,7 +6,7 @@ export class Brand {
     id: number;
 
     @Column()
-    brand_name: string;
+    brandName: string;
 
     @Column()
     brand_slug: string;

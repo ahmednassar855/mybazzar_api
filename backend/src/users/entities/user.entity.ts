@@ -27,21 +27,15 @@ export class User {
     roles: Roles[];
 
     @Column({default: false})
-    is_active: boolean;
+    isActive: boolean;
 
-    @Column()
-    token: string;
-
-    @OneToMany(() => Address, (address) => address.user_id)
+    @OneToMany(() => Address, (address) => address.userId)
     addresses: Address[];
 
     @OneToOne(() => Brand)
     @JoinColumn()
     brand: Brand
 
-
-    @OneToMany(() => Order, (order) => order.user_id)
-    orders: Order[];
 
     @OneToMany(() => Payment, (payment) => payment.user_id)
     payments: Payment[];
