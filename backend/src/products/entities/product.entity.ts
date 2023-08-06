@@ -1,4 +1,7 @@
+import { Brand } from "src/brands/entities/brand.entity";
 import { Order } from "src/orders/entities/order.entity";
+import { ProductType } from "src/product-types/entities/product-type.entity";
+import { ProductVariant } from "src/product-variants/entities/product-variant.entity";
 import { Stock } from "src/stocks/entities/stock.entity";
 import { User } from "src/users/entities/user.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
@@ -10,10 +13,10 @@ export class Product {
     id: number;
 
     @Column()
-    product_name: string;
+    name: string;
 
     @Column()
-    product_slug: string;
+    slug: string;
 
     @Column()
     price: number;
@@ -22,24 +25,22 @@ export class Product {
     discount: number;
 
     @Column()
-    discounted_price: number;
+    discountedPrice: number;
     
     @Column()
     delivery_period: number;
 
     @Column()
-    cover_photo: string;
+    coverPhoto: string;
 
     @Column({ type: 'simple-array', nullable: true })
-    product_photos: string[];
+    productPhotos: string[];
 
-
-    @ManyToOne(() => User, (user) => user.products)
-    user_id: User;
-
-    @ManyToOne(() => Order, (order) => order.products)
-    order_id: Order;
-
+    @ManyToOne(() => ProductVariant, (prodVar) => prodVar.products)
+    varId: ProductVariant;
+    
+    @ManyToOne(() => Brand, (brand) => brand.products)
+    brands: Brand;
 
     @OneToOne(() => Stock)
     @JoinColumn()

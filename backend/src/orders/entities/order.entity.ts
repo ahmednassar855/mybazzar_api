@@ -1,3 +1,4 @@
+import { ProductVariant } from "src/product-variants/entities/product-variant.entity";
 import { Product } from "src/products/entities/product.entity";
 import { User } from "src/users/entities/user.entity";
 import { OrderDeliveries } from "src/utility/common/order-deliveries.enum";
@@ -16,13 +17,9 @@ export class Order {
     @Column({type:'enum' , enum:OrderDeliveries , array:true , default:[OrderDeliveries.DELIVERD]})
     orderDeliveries: OrderDeliveries[];
 
-    // order to realted with variants not with product
-    @ManyToOne(() => User)
-    @JoinColumn({ name: 'user_id' })
-    user: User;
+    @OneToMany(() => ProductVariant, (prodVariant) => prodVariant.orders)
+    productVariants: ProductVariant[];
 
-    @OneToMany(() => Product, (product) => product.order_id)
-    products: Product[];
 
     @CreateDateColumn()
     createdAt: Timestamp;

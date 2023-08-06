@@ -1,6 +1,4 @@
-import { User } from "src/users/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, Tree, TreeChildren, TreeParent, UpdateDateColumn } from "typeorm";
-
 
 @Entity({name:'categories'})
 @Tree("nested-set")
@@ -9,19 +7,25 @@ export class Category {
     id: number;
 
     @Column()
-    category_name: string;
+    name: string;
 
     @Column()
-    category_slug: string;
+    slug: string;
 
-    @TreeChildren()
-    children: Category[];
+    @Column()
+    description: string;
+
+    @Column()
+    descriptionSlug: string;
 
     @TreeParent()
     parent: Category;
+   
+    @Column()
+    backgroundImage: string;
 
-    @ManyToOne(() => User, (user) => user.categories)
-    user_id: User;
+    @Column()
+    backgroundImagUrl: string;
 
     @CreateDateColumn()
     createdAt: Timestamp;

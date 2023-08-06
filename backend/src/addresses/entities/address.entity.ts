@@ -30,7 +30,7 @@ export class Address {
     floor: number;
 
     @Column()
-    apartment: string;
+    apartment: number;
 
     @Column()
     postalCode: number;
@@ -39,7 +39,7 @@ export class Address {
     defaultAddress: Address;
 
     @ManyToOne(() => User, (user) => user.addresses)
-    userId: User;
+    user: User;
 
     @CreateDateColumn()
     createdAt: Timestamp;

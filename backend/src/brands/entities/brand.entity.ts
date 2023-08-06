@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { Product } from "src/products/entities/product.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 
 @Entity({name: 'brands'})
 export class Brand {
@@ -9,7 +10,10 @@ export class Brand {
     brandName: string;
 
     @Column()
-    brand_slug: string;
+    brandSlug: string;
+
+    @OneToMany( ()=> Product , (product) =>product.brands )
+    products: Product[];
 
     @CreateDateColumn()
     createdAt: Timestamp;
